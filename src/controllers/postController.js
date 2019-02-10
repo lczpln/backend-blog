@@ -38,3 +38,15 @@ exports.store = async (req, res, next) => {
         return res.status(500).send({ msg: `Erro ao criar novo post => ${e}` })
     }
 }
+
+exports.delete = async (req, res, next) => {
+    const post = req.params.id;
+    
+    try {
+        await Post.findByIdAndDelete({ _id: post })
+
+        return res.status(200).send({ msg: 'Post excluido com sucesso.' });
+    } catch (e) {
+        return res.status(500).send({ msg: `Erro ao criar excluir post => ${e}` })   
+    }
+}
